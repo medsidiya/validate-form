@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="./styles.css">
+
+</body>
+</html>
+<div class="contenair">
+    <div class="content">
+<form id="myForm" action="login.php" method="post">
+    <h1>Login</h1>
+    <label for="nom" class="lableclass">Entrer Votre Nom SVP:</label>
+    <input type="text" id="nom" name="nom"  value="" oninput="limitCharacters(this, 25)">
+    <div id="nomError" class="error"></div>
+    
+    <label for="prenom" class="lableclass">Entrer Votre Prénom SVP:</label>
+    <input type="text" id="prenom" name="prenom"  value="">
+    <div id="prenomError" class="error"></div>
+    
+    <label for="email" class="lableclass">Entrer Votre Adresse email SVP:</label>
+    <input type="text" id="email" name="email" value="">
+    <div id="emailError" class="error"></div>
+    
+    <label for="password" class="lableclass">Entrer Votre Mot de passe SVP:</label>
+    <input type="password" id="password" name="pass" >
+    <div id="passwordError" class="error"></div>
+
+    <label for="num" class="lableclass">Entrer Votre Numéro de téléphone SVP:</label>
+    <input type="Numéro" id="num" name="num">
+    <div id="numError" class="error"></div>
+    
+    <label for="age" class="lableclass">Entrer Votre age SVP:</label>
+    <input type="Numéro" id="age" name="age">
+    <div id="ageError" class="error"></div>
+
+    <label for="lieun" class="lableclass">Entrer Votre Lieu de naissance SVP:</label>
+    <input type="text" id="lieun" name="lieun">
+    <div id="lieunError" class="error"></div>
+
+    <button type="submit">Envoyer</button>
+  </form>
+  </div>
+</div>
+<script src="./script.js"></script>
+<script>
+    // intercepter l'événement de soumission du formulaire
+document.getElementById("myForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // empêcher la soumission par défaut
+    
+    // valider le champ nom
+    var nom = document.getElementById("nom").value;
+    var nomRegex =/^[a-zA-Z]+(([',. -][a-zA-Z  ])?[a-zA-Z]*)*$/;
+    if (!nomRegex.test(nom)) {
+      document.getElementById("nomError").innerHTML = "Le nom ne doit contenir que des lettres.";
+      return false;
+    } else {
+      document.getElementById("nomError").innerHTML = "";
+    }
+
+
+    // valider le champ prenom
+    var prenom = document.getElementById("prenom").value;
+    var prenomRegex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+    if (!prenomRegex.test(prenom)) {
+      document.getElementById("prenomError").innerHTML = "Le prénom ne doit contenir que des lettres.";
+      return false;
+    } else {
+      document.getElementById("prenomError").innerHTML = "";
+    }
+    
+    // valider le champ email
+    var email = document.getElementById("email").value;
+    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      document.getElementById("emailError").innerHTML = "L'adresse email n'est pas valide.";
+      return false;
+    } else {
+      document.getElementById("emailError").innerHTML = "";
+    }
+
+    email.addEventListener('Keyup' , ()=>{
+
+      if (email === '' || email == null) {
+        email.style.borderColor = "red";
+        emailError.innerHTML = 'this input is empty';
+      }else if(emailRegex(email) === false ){
+        email.style.borderColor = "red";
+        emailError.innerHTML = 'invalid Email';
+      }else {
+        email.style.borderColor = "#198754";
+        emailError.innerHTML = '';
+      }
+      } );
+    // valider le champ password
+
+    var password = document.getElementById("password").value;
+    var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\s)[A-Za-z\d\s]{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+      document.getElementById("passwordError").innerHTML = "Le mot de passe doit contenir au moins 8 caractères avec au moins une lettre majuscule, une lettre minuscule, un chiffre et un seul espace.";
+      return false;
+    } else {
+      document.getElementById("passwordError").innerHTML = "";
+    }
+    // valider le champ numero
+    var num = document.getElementById("num").value;
+    var numRegex = /^[4|3|2][0-9]\d{6}$/;
+    if (!numRegex.test(num)) {
+      document.getElementById("numError").innerHTML = "Le numero ne doit contenir que des chiffre.";
+      return false;
+    } else {
+      document.getElementById("numError").innerHTML = "";
+    }
+    // valider le champ age
+    var age = document.getElementById("age").value;
+    var ageRegex = /^\d{1,3}$/;
+        if (!ageRegex.test(age)) {
+      document.getElementById("ageError").innerHTML = "L'age doit contenir au mois une chiffre et au plus  trois chiffre seulement.";
+      return false;
+    } else {
+      document.getElementById("ageError").innerHTML = "";
+    }
+     // valider le champ lieu de naissance
+    var lieun = document.getElementById("lieun").value;
+    var lieunRegex = /^[a-zA-Z]{3,10}$/;
+        if (!lieunRegex.test(lieun)) {
+      document.getElementById("lieunError").innerHTML = "Le lieu de naissance doit contenir au moins trois lettres et au plus  dix lettres seulement.";
+      return false;
+    } else {
+      document.getElementById("lieunError").innerHTML = "";
+    }
+    // si tous les champs sont valides, soumettre le formulaire
+    this.submit();
+  });
+
+  function limitCharacters(input, maxLength) {
+  if (input.value.length > maxLength) {
+    input.value = input.value.slice(0, maxLength);
+  }
+}
+
+
+</script>
+
+</body>
+</html>
